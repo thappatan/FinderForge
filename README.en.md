@@ -20,7 +20,7 @@ It started as a "New File" menu (the one Windows has and macOS, for some reason,
 
 **Open in Terminal** with whatever terminal you actually use, Terminal, iTerm, Warp, Ghostty and so on. Same idea for **Open in Editor** (VS Code, Cursor, Xcode, Zed…). Only the apps you have installed show up in settings.
 
-There's a small settings window and a short intro on first launch, both SwiftUI. The menu itself and all the file work run inside a Finder Sync extension, and the two sides share their settings through an App Group. UI is in English and Thai and just follows your system language.
+It lives in the menu bar (no Dock icon): click the icon to open settings, flip the two "Open in …" items on or off, or quit. There's a short intro the first time, all SwiftUI. The menu itself and all the file work run inside a Finder Sync extension, and the two sides share their settings through an App Group. UI is in English and Thai and just follows your system language.
 
 ## Building
 

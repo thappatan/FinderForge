@@ -1,5 +1,9 @@
 /* FinderForge — Thai */
 
+/* Menu bar */
+"Settings…" = "ตั้งค่า…";
+"Quit FinderForge" = "ออกจาก FinderForge";
+
 /* Sidebar / Settings */
 "General" = "ทั่วไป";
 "Open in Terminal" = "เปิดใน Terminal";

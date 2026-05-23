@@ -19,21 +19,71 @@
 //
 
 import SwiftUI
+import AppKit
+import OSLog
+
+let appLog = Logger(subsystem: "com.devsun.FinderForge", category: "app")
 
 @main
 struct FinderForgeApp: App {
-    @AppStorage("hasCompletedOnboarding") private var hasOnboarded = false
+    @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
     var body: some Scene {
-        WindowGroup {
-            if hasOnboarded {
-                SettingsView()
-                    .frame(minWidth: 520, minHeight: 480)
-            } else {
-                OnboardingView(onComplete: { hasOnboarded = true })
-                    .frame(minWidth: 520, minHeight: 480)
-            }
+        // The app lives in the menu bar — no Dock icon, no main window.
+        MenuBarExtra("FinderForge", systemImage: "folder.badge.plus") {
+            MenuBarContent()
         }
-        .windowResizability(.contentSize)
+    }
+}
+
+/// Shows onboarding until it's completed, then the settings UI.
+struct RootView: View {
+    @AppStorage("hasCompletedOnboarding") private var hasOnboarded = false
+
+    var body: some View {
+        if hasOnboarded {
+            SettingsView()
+        } else {
+            OnboardingView(onComplete: { hasOnboarded = true })
+        }
+    }
+}
+
+/// Makes this a menu-bar-only (accessory) app and owns the single settings /
+/// onboarding window. We manage the window by hand rather than using a SwiftUI
+/// `Settings` / `Window` scene: those don't open reliably from a MenuBarExtra in
+/// an accessory app.
+final class AppDelegate: NSObject, NSApplicationDelegate {
+    static private(set) weak var shared: AppDelegate?
+    private var window: NSWindow?
+
+    override init() {
+        super.init()
+        AppDelegate.shared = self
+    }
+
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        NSApp.setActivationPolicy(.accessory)
+        // First launch: pop the window so the user is told to enable the extension.
+        if !UserDefaults.standard.bool(forKey: "hasCompletedOnboarding") {
+            showMainWindow()
+        }
+    }
+
+    func showMainWindow() {
+        appLog.debug("showMainWindow() called; window exists=\(self.window != nil)")
+        if window == nil {
+            let hosting = NSHostingController(rootView: RootView())
+            let win = NSWindow(contentViewController: hosting)
+            win.title = "FinderForge"
+            win.styleMask = [.titled, .closable, .miniaturizable]
+            win.isReleasedWhenClosed = false        // reuse the window when reopened
+            win.setContentSize(NSSize(width: 640, height: 520))
+            win.center()
+            window = win
+        }
+        NSApp.activate(ignoringOtherApps: true)
+        window?.makeKeyAndOrderFront(nil)
+        window?.orderFrontRegardless()
     }
 }

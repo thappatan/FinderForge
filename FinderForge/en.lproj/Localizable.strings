@@ -1,5 +1,9 @@
 /* FinderForge — English */
 
+/* Menu bar */
+"Settings…" = "Settings…";
+"Quit FinderForge" = "Quit FinderForge";
+
 /* Sidebar / Settings */
 "General" = "General";
 "Open in Terminal" = "Open in Terminal";
