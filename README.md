@@ -2,86 +2,86 @@
 
 <img src="FinderForgeIcon.png" width="96" align="right" alt="">
 
-A small macOS app that puts some genuinely useful things into Finder's right-click menu.
+แอป macOS ตัวเล็กๆ ที่เอาของที่ใช้ได้จริงไปใส่ในเมนูคลิกขวาของ Finder
 
-It started as a "New File" menu (the one Windows has and macOS, for some reason, still doesn't) and slowly turned into a handful of things I kept wishing Finder could just do.
+เริ่มจากอยากได้เมนู "New File" (แบบที่ Windows มี แต่ macOS ไม่รู้ทำไมถึงยังไม่มีสักที) แล้วก็ค่อยๆ กลายเป็นของอีกหลายอย่างที่แอบอยากให้ Finder ทำได้มานาน
 
-*[อ่านภาษาไทย →](README.th.md)*
+*[Read in English →](README.en.md)*
 
 <p align="center">
-  <img src="Images/Image.jpg" width="640" alt="FinderForge's New File menu and other items in Finder's right-click menu">
+  <img src="Images/Image.jpg" width="640" alt="เมนู New File และเมนูอื่นๆ ของ FinderForge ในเมนูคลิกขวาของ Finder">
 </p>
 
-## What it does
+## ทำอะไรได้บ้าง
 
-**New File** from a set of templates: text, Markdown, HTML, JSON, Python, shell, Swift, RTF. You choose which ones show up, and each can carry its own starter content and default filename. Templates understand a few placeholders too, like `{date}`, `{user}`, `{folder}` and `{uuid}`.
+**New File** จาก template หลายแบบ: text, Markdown, HTML, JSON, Python, shell, Swift, RTF เลือกได้ว่าจะให้โผล่อันไหนบ้าง แต่ละอันใส่เนื้อหาเริ่มต้นกับชื่อไฟล์ของตัวเองได้ และ template ยังใส่ตัวแปรได้ด้วย เช่น `{date}`, `{user}`, `{folder}`, `{uuid}`
 
-**Cut / Paste (Move)** so you can move files around the way Windows does it, instead of dragging or holding ⌥ while pasting. Cut files get a little scissors badge.
+**Cut / Paste (Move)** ย้ายไฟล์แบบเดียวกับ Windows แทนที่จะลากหรือกด ⌥ ตอนวาง ไฟล์ที่ตัดไว้จะมี badge รูปกรรไกรติดอยู่
 
-**Open in Terminal** with whatever terminal you actually use, Terminal, iTerm, Warp, Ghostty and so on. Same idea for **Open in Editor** (VS Code, Cursor, Xcode, Zed…). Only the apps you have installed show up in settings.
+**Open in Terminal** ด้วย terminal ที่ใช้อยู่จริง ไม่ว่าจะ Terminal, iTerm, Warp, Ghostty และอื่นๆ เหมือนกันกับ **Open in Editor** (VS Code, Cursor, Xcode, Zed…) ใน settings จะโชว์เฉพาะตัวที่ติดตั้งไว้
 
-There's a small settings window and a short intro on first launch, both SwiftUI. The menu itself and all the file work run inside a Finder Sync extension, and the two sides share their settings through an App Group. UI is in English and Thai and just follows your system language.
+มีหน้าต่าง settings เล็กๆ กับหน้าแนะนำตอนเปิดครั้งแรก เขียนด้วย SwiftUI ส่วนตัวเมนูกับงานจัดการไฟล์ทั้งหมดอยู่ใน Finder Sync extension สองฝั่งนี้แชร์ค่า settings กันผ่าน App Group ตัว UI มีอังกฤษกับไทย และจะเปลี่ยนตามภาษาของระบบเอง
 
-## Building
+## วิธี build
 
-You need Xcode 15+ and XcodeGen:
+ต้องมี Xcode 15 ขึ้นไป กับ XcodeGen:
 
 ```
 brew install xcodegen
 xcodegen generate
 ```
 
-Then run the helper script, which builds, reloads the extension and opens the app:
+จากนั้นรันสคริปต์ช่วย ซึ่งจะ build, reload extension แล้วเปิดแอปให้:
 
 ```
 ./Scripts/run.sh
 ```
 
-Or just open `FinderForge.xcodeproj` and press Cmd+R.
+หรือจะเปิด `FinderForge.xcodeproj` แล้วกด Cmd+R ก็ได้
 
-The `.xcodeproj` is generated from `project.yml`, so it isn't checked in. Edit `project.yml`, never the project file directly. If you forked this, point `DEVELOPMENT_TEAM` at your own team.
+ตัว `.xcodeproj` ถูก generate จาก `project.yml` เลยไม่ได้เก็บไว้ใน git ให้แก้ที่ `project.yml` อย่าไปแก้ไฟล์โปรเจกต์ตรงๆ ถ้า fork ไปใช้ ก็เปลี่ยน `DEVELOPMENT_TEAM` เป็น team ของตัวเอง
 
-The first time, you have to switch the extension on yourself: System Settings → General → Login Items & Extensions, then find it under Added Extensions (or Finder) and tick FinderForge. Right-click any folder and the menu should be there. If it isn't, `killall Finder` usually sorts it out.
+ครั้งแรกต้องไปเปิด extension เองก่อน: System Settings → General → Login Items & Extensions แล้วหาในหัวข้อ Added Extensions (หรือ Finder) ติ๊กเปิด FinderForge จากนั้นคลิกขวาที่โฟลเดอร์ไหนก็ได้ เมนูน่าจะขึ้นมา ถ้าไม่ขึ้น `killall Finder` มักจะช่วยได้
 
-## How it's laid out
+## โครงสร้าง
 
 ```
-FinderForge/             the SwiftUI app (settings + onboarding)
-FinderMenuExtension/     the Finder Sync extension (menu, file ops)
-Shared/                  SharedSettings.swift, used by both
-Scripts/                 run.sh and the icon scripts
-project.yml              the XcodeGen spec
-FinderForgeIcon.png      1024px icon master
+FinderForge/             แอป SwiftUI (settings + onboarding)
+FinderMenuExtension/     Finder Sync extension (เมนู, จัดการไฟล์)
+Shared/                  SharedSettings.swift ใช้ร่วมกันทั้งสองฝั่ง
+Scripts/                 run.sh กับสคริปต์ทำไอคอน
+project.yml              สเปกของ XcodeGen
+FinderForgeIcon.png      ไอคอนต้นฉบับ 1024px
 ```
 
-`SharedSettings.swift` is compiled into both targets and is the only thing they share at runtime, via the App Group.
+`SharedSettings.swift` ถูก compile เข้าทั้งสอง target และเป็นอย่างเดียวที่สองฝั่งใช้ร่วมกันตอนรัน ผ่าน App Group
 
-## A few things worth knowing
+## เรื่องที่ควรรู้ไว้
 
-Finder hands the menu off across an XPC boundary and drops anything it can't serialize on the way. That's why there are no real separator lines or styled section headers in the menu, and why the menu icons are plain colored bitmaps rather than SF Symbols (template symbols come out solid black on the other side). Spent a while learning that one.
+Finder ส่งเมนูข้ามขอบเขต XPC แล้วตัดอะไรที่ serialize ไม่ได้ทิ้งระหว่างทาง เลยเป็นเหตุผลว่าทำไมในเมนูถึงไม่มีเส้น separator จริงๆ หรือหัวข้อ section แบบมีสไตล์ และทำไมไอคอนในเมนูถึงเป็น bitmap สีธรรมดาแทนที่จะเป็น SF Symbol (symbol แบบ template จะกลายเป็นสีดำทึบฝั่งโน้น) กว่าจะรู้ก็เสียเวลาไปพอควร
 
-A Finder extension also can't claim ⌘X / ⌘V globally, so Cut and Paste only live in the right-click menu, not the keyboard.
+อีกอย่างคือ Finder extension ดักจับ ⌘X / ⌘V ระดับทั้งระบบไม่ได้ Cut กับ Paste เลยอยู่ในเมนูคลิกขวาอย่างเดียว ไม่มีคีย์ลัด
 
-## Changing the icon
+## เปลี่ยนไอคอน
 
-Replace `FinderForgeIcon.png` and run:
+แทนไฟล์ `FinderForgeIcon.png` แล้วรัน:
 
 ```
 ./Scripts/make_app_icon.sh
 ```
 
-It trims the transparent padding, scales the art to fill the tile and writes out every size. Pass a number (e.g. `./Scripts/make_app_icon.sh 1000`) if you want it tighter or looser.
+มันจะ trim ขอบโปร่งใส ขยายภาพให้เต็มกรอบ แล้ว export ออกมาทุกขนาด ใส่ตัวเลขต่อท้ายได้ (เช่น `./Scripts/make_app_icon.sh 1000`) ถ้าอยากให้ชิดขอบกว่าหรือหลวมกว่านี้
 
-## Adding a language
+## เพิ่มภาษา
 
-Strings live in `en.lproj/` and `th.lproj/` under each target, and the English text in the code is the lookup key. To add another language, drop a `<lang>.lproj/Localizable.strings` into both targets with the same keys and run `xcodegen generate`.
+ข้อความอยู่ใน `en.lproj/` กับ `th.lproj/` ของแต่ละ target และข้อความภาษาอังกฤษในโค้ดคือ key ที่ใช้ค้นหา ถ้าจะเพิ่มภาษา ก็เอา `<lang>.lproj/Localizable.strings` ใส่เข้าไปทั้งสอง target ด้วย key ชุดเดียวกัน แล้วรัน `xcodegen generate`
 
-## Still on the list
+## ที่ยังค้างอยู่
 
-Copy Path, New Folder from a selection, import/export templates, zip compression, templates that react to `.git`, iCloud sync.
+Copy Path, New Folder จากไฟล์ที่เลือก, import/export templates, บีบอัด zip, template ที่รู้จัก `.git`, iCloud sync
 
 ## License
 
-GPLv3, full text in [LICENSE](LICENSE). Fork away, just keep it open.
+GPLv3 ข้อความเต็มอยู่ในไฟล์ [LICENSE](LICENSE) เอาไป fork ได้เลย ขอแค่เปิด source ต่อ
 
 © 2026 thappatan chanphen
