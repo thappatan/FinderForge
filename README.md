@@ -3,6 +3,7 @@
   <h1>FinderForge</h1>
   <p><strong>Right-click superpowers for Finder.</strong></p>
   <p>Create files from templates, move files with Cut/Paste, and open folders in your terminal or editor — all from Finder's context menu.</p>
+  <p><strong>English</strong> · <a href="README.th.md">ไทย</a></p>
 </div>
 
 ---
