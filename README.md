@@ -8,6 +8,10 @@ It started as a "New File" menu (the one Windows has and macOS, for some reason,
 
 *[อ่านภาษาไทย →](README.th.md)*
 
+<p align="center">
+  <img src="Images/Image.jpg" width="640" alt="FinderForge's New File menu and other items in Finder's right-click menu">
+</p>
+
 ## What it does
 
 **New File** from a set of templates: text, Markdown, HTML, JSON, Python, shell, Swift, RTF. You choose which ones show up, and each can carry its own starter content and default filename. Templates understand a few placeholders too, like `{date}`, `{user}`, `{folder}` and `{uuid}`.

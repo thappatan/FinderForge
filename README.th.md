@@ -8,6 +8,10 @@
 
 *[Read in English →](README.md)*
 
+<p align="center">
+  <img src="Images/Image.jpg" width="640" alt="เมนู New File และเมนูอื่นๆ ของ FinderForge ในเมนูคลิกขวาของ Finder">
+</p>
+
 ## ทำอะไรได้บ้าง
 
 **New File** จาก template หลายแบบ: text, Markdown, HTML, JSON, Python, shell, Swift, RTF เลือกได้ว่าจะให้โผล่อันไหนบ้าง แต่ละอันใส่เนื้อหาเริ่มต้นกับชื่อไฟล์ของตัวเองได้ และ template ยังใส่ตัวแปรได้ด้วย เช่น `{date}`, `{user}`, `{folder}`, `{uuid}`
