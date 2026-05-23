@@ -21,3 +21,6 @@ dist/
 
 # Claude Code local settings
 .claude/settings.local.json
+
+# Internal spec doc, kept local only
+Document.md
