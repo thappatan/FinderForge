@@ -1,113 +1,83 @@
-<div align="center">
-  <img src="FinderForgeIcon.png" width="128" alt="FinderForge icon">
-  <h1>FinderForge</h1>
-  <p><strong>Right-click superpowers for Finder.</strong></p>
-  <p>Create files from templates, move files with Cut/Paste, and open folders in your terminal or editor — all from Finder's context menu.</p>
-  <p><strong>English</strong> · <a href="README.th.md">ไทย</a></p>
-</div>
+# FinderForge
 
----
+<img src="FinderForgeIcon.png" width="96" align="right" alt="">
 
-## Features
+A small macOS app that puts some genuinely useful things into Finder's right-click menu.
 
-- **New File** — create files from the right-click menu (txt, md, html, json, py, sh, swift, rtf…). Toggle each type on/off.
-  - Per-template **content** with variables: `{date}` `{time}` `{datetime}` `{user}` `{folder}` `{uuid}` `{cursor}`
-  - Per-template **default file name**
-- **Cut / Paste (Move)** — Windows-style move via right-click, with a scissors badge on cut items.
-- **Open in Terminal** — Terminal, iTerm, Warp, Ghostty, WezTerm, kitty, Alacritty… (pick yours in Settings).
-- **Open in Editor** — VS Code, Cursor, Windsurf, Xcode, Sublime Text, Zed, Nova… (only installed ones are shown).
-- **Settings app** (SwiftUI) + first-run **onboarding**.
-- **Localized** in English and ไทย — follows the system language automatically.
+It started as a "New File" menu (the one Windows has and macOS, for some reason, still doesn't) and slowly turned into a handful of things I kept wishing Finder could just do.
 
-## How it works
+*[อ่านภาษาไทย →](README.th.md)*
 
-Two targets sharing settings through an **App Group**:
+## What it does
+
+**New File** from a set of templates: text, Markdown, HTML, JSON, Python, shell, Swift, RTF. You choose which ones show up, and each can carry its own starter content and default filename. Templates understand a few placeholders too, like `{date}`, `{user}`, `{folder}` and `{uuid}`.
+
+**Cut / Paste (Move)** so you can move files around the way Windows does it, instead of dragging or holding ⌥ while pasting. Cut files get a little scissors badge.
+
+**Open in Terminal** with whatever terminal you actually use, Terminal, iTerm, Warp, Ghostty and so on. Same idea for **Open in Editor** (VS Code, Cursor, Xcode, Zed…). Only the apps you have installed show up in settings.
+
+There's a small settings window and a short intro on first launch, both SwiftUI. The menu itself and all the file work run inside a Finder Sync extension, and the two sides share their settings through an App Group. UI is in English and Thai and just follows your system language.
+
+## Building
+
+You need Xcode 15+ and XcodeGen:
 
 ```
-Finder ──(right-click)──▶ FinderMenuExtension (FIFinderSync, AppKit)
-                                  │  reads settings / writes cut state
-                                  ▼
-                          App Group UserDefaults
-                                  ▲
-                                  │  writes settings
-                          FinderForge (SwiftUI container app)
-```
-
-| | |
-| --- | --- |
-| Container app UI | SwiftUI |
-| Extension | AppKit + FinderSync |
-| Language | Swift 5 mode |
-| Min macOS | 13.0 (Ventura) |
-| Project | [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`project.yml`) |
-| Shared storage | App Group UserDefaults |
-
-## Requirements
-
-- macOS 13+ and **Xcode 15+**
-- **XcodeGen** — `brew install xcodegen`
-- An Apple Developer team for signing. Set yours in `project.yml` (`DEVELOPMENT_TEAM`) and the bundle prefix if you fork.
-  > App Groups work with a **free** Personal Team for local development, but distributing to other Macs / the App Store needs a **paid** Apple Developer Program membership.
-
-## Build & Run
-
-```bash
-# 1. Generate the Xcode project from project.yml
+brew install xcodegen
 xcodegen generate
+```
 
-# 2a. Build + reload the extension + launch (recommended)
+Then run the helper script, which builds, reloads the extension and opens the app:
+
+```
 ./Scripts/run.sh
-
-# 2b. …or open in Xcode and press Cmd+R
-open FinderForge.xcodeproj
 ```
 
-**Enable the extension once:** System Settings → General → *Login Items & Extensions* → **Added Extensions** (or *Finder*) → turn on **FinderForge**. Then right-click any folder in Finder.
+Or just open `FinderForge.xcodeproj` and press Cmd+R.
 
-> Menu not showing after enabling? `killall Finder`
+The `.xcodeproj` is generated from `project.yml`, so it isn't checked in. Edit `project.yml`, never the project file directly. If you forked this, point `DEVELOPMENT_TEAM` at your own team.
 
-## Project structure
+The first time, you have to switch the extension on yourself: System Settings → General → Login Items & Extensions, then find it under Added Extensions (or Finder) and tick FinderForge. Right-click any folder and the menu should be there. If it isn't, `killall Finder` usually sorts it out.
+
+## How it's laid out
 
 ```
-FinderForge/
-├── FinderForge/                 ← container app (SwiftUI)
-│   ├── FinderForgeApp.swift · SettingsView.swift · OnboardingView.swift
-│   ├── Assets.xcassets/ · Info.plist · FinderForge.entitlements
-│   └── en.lproj/ · th.lproj/
-├── FinderMenuExtension/         ← Finder Sync extension (AppKit)
-│   ├── FinderSync.swift · MenuBuilder.swift · FileCreator.swift · CutPasteManager.swift
-│   ├── Info.plist · FinderMenuExtension.entitlements
-│   └── en.lproj/ · th.lproj/
-├── Shared/SharedSettings.swift  ← model + App Group storage (both targets)
-├── Scripts/                     ← run.sh, make_app_icon.sh, frame_icon.swift
-├── project.yml                  ← XcodeGen spec (edit this, not the .xcodeproj)
-└── FinderForgeIcon.png          ← 1024px master app icon
+FinderForge/             the SwiftUI app (settings + onboarding)
+FinderMenuExtension/     the Finder Sync extension (menu, file ops)
+Shared/                  SharedSettings.swift, used by both
+Scripts/                 run.sh and the icon scripts
+project.yml              the XcodeGen spec
+FinderForgeIcon.png      1024px icon master
 ```
 
-The `.xcodeproj` is **generated** — it is git-ignored. Edit `project.yml`, then run `xcodegen generate`.
+`SharedSettings.swift` is compiled into both targets and is the only thing they share at runtime, via the App Group.
 
-## Icon
+## A few things worth knowing
 
-The app icon is generated from `FinderForgeIcon.png`. To change it, replace that file and run:
+App Groups work with a free Apple ID as long as you're only testing on your own Mac. Shipping it to anyone else, or to the App Store, needs a paid developer account.
 
-```bash
-./Scripts/make_app_icon.sh        # trims padding, fills the tile, exports all sizes
+Finder hands the menu off across an XPC boundary and drops anything it can't serialize on the way. That's why there are no real separator lines or styled section headers in the menu, and why the menu icons are plain colored bitmaps rather than SF Symbols (template symbols come out solid black on the other side). Spent a while learning that one.
+
+A Finder extension also can't claim ⌘X / ⌘V globally, so Cut and Paste only live in the right-click menu, not the keyboard.
+
+## Changing the icon
+
+Replace `FinderForgeIcon.png` and run:
+
+```
+./Scripts/make_app_icon.sh
 ```
 
-## Localization
+It trims the transparent padding, scales the art to fill the tile and writes out every size. Pass a number (e.g. `./Scripts/make_app_icon.sh 1000`) if you want it tighter or looser.
 
-UI strings live in `*/en.lproj/Localizable.strings` and `*/th.lproj/Localizable.strings` for each target. Source string literals are English (the lookup keys). To add a language, create `<lang>.lproj/Localizable.strings` in **both** targets with the same keys and run `xcodegen generate`.
+## Adding a language
 
-## Known limitations
+Strings live in `en.lproj/` and `th.lproj/` under each target, and the English text in the code is the lookup key. To add another language, drop a `<lang>.lproj/Localizable.strings` into both targets with the same keys and run `xcodegen generate`.
 
-- Finder serializes the extension menu over **XPC**, which strips custom styling — native separators, section headers, and attributed-title font/color don't survive (the menu uses plain items + baked-in colored icons).
-- A Finder Sync extension can't intercept global `⌘X`/`⌘V`; Cut/Paste live in the context menu.
-- Sandbox limits file access to what Finder vends; `temporary-exception` entitlements are used for dev/direct distribution and must be removed for the App Store.
+## Still on the list
 
-## Roadmap
-
-Copy Path · New Folder (with selection) · Import/Export templates · Compress to .zip · project detection (`.git`) · iCloud sync · more languages.
+Copy Path, New Folder from a selection, import/export templates, zip compression, templates that react to `.git`, iCloud sync.
 
 ## License
 
-_Choose a license (e.g. MIT) and add a `LICENSE` file._
+Haven't picked one yet.
