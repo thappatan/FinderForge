@@ -1,4 +1,7 @@
 #!/bin/zsh
+# Copyright (C) 2026 thappatan chanphen — part of FinderForge.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
 # Build FinderForge, reload the Finder extension cleanly (no ghost instances),
 # and launch the app. Run from anywhere: ./Scripts/run.sh
 set -e
