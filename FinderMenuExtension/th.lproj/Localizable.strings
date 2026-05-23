@@ -1,0 +1,11 @@
+/* FinderMenuExtension — Thai */
+
+"New File" = "ไฟล์ใหม่";
+"(No file types enabled)" = "(ไม่ได้เปิดชนิดไฟล์ใดไว้)";
+"Open in %@" = "เปิดใน %@";
+"Cut" = "ตัด";
+"Cut %d items" = "ตัด %d รายการ";
+"Paste (Move)" = "วาง (ย้าย)";
+"Paste %d items (Move)" = "วาง %d รายการ (ย้าย)";
+"Clear Cut Selection" = "ล้างรายการที่ตัด";
+"Some items could not be moved" = "ย้ายบางรายการไม่ได้";

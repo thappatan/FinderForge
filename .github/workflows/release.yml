@@ -1,0 +1,75 @@
+name: Release
+
+# Tag a commit to publish a release:  git tag v1.0.0 && git push origin v1.0.0
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Version tag for the release (e.g. v1.0.0)'
+        required: true
+
+permissions:
+  contents: write   # required to create a GitHub Release
+
+jobs:
+  release:
+    name: Build & publish
+    runs-on: macos-14
+    env:
+      VERSION: ${{ github.event.inputs.tag || github.ref_name }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install tools
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      # NOTE: this produces an UNSIGNED build. macOS Gatekeeper will block it on
+      # other machines until it is Developer ID signed + notarized (needs a paid
+      # Apple Developer Program membership). See the "Signing & notarization"
+      # block below — fill in the secrets and uncomment to ship a real release.
+      - name: Build (Release, unsigned)
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -project FinderForge.xcodeproj \
+            -scheme FinderForge \
+            -configuration Release \
+            -destination 'platform=macOS' \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGN_IDENTITY="" \
+            DEVELOPMENT_TEAM="" \
+            build
+
+      - name: Package .zip and .dmg
+        run: |
+          APP="build/Build/Products/Release/FinderForge.app"
+          mkdir -p dist
+          ditto -c -k --sequesterRsrc --keepParent "$APP" "dist/FinderForge-${VERSION}.zip"
+          hdiutil create -volname "FinderForge" -srcfolder "$APP" -ov -format UDZO \
+            "dist/FinderForge-${VERSION}.dmg"
+          ls -lh dist
+
+      # --- Signing & notarization (optional, requires a paid program) ---------
+      # Add repo secrets: BUILD_CERTIFICATE_BASE64, P12_PASSWORD, KEYCHAIN_PASSWORD,
+      # DEVELOPMENT_TEAM, AC_API_KEY_ID, AC_API_ISSUER_ID, AC_API_KEY_BASE64.
+      # Then sign the .app with "Developer ID Application", run:
+      #   xcrun notarytool submit dist/FinderForge-${VERSION}.zip --key … --wait
+      #   xcrun stapler staple "$APP"
+      # and re-package before uploading.
+      # ------------------------------------------------------------------------
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.VERSION }}
+          name: FinderForge ${{ env.VERSION }}
+          generate_release_notes: true
+          files: |
+            dist/FinderForge-${{ env.VERSION }}.zip
+            dist/FinderForge-${{ env.VERSION }}.dmg

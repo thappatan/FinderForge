@@ -1,0 +1,47 @@
+/* FinderForge — Thai */
+
+/* Sidebar / Settings */
+"General" = "ทั่วไป";
+"Open in Terminal" = "เปิดใน Terminal";
+"Open in Editor" = "เปิดใน Editor";
+"File Types" = "ชนิดไฟล์";
+"Reset to defaults" = "รีเซ็ตเป็นค่าเริ่มต้น";
+
+/* Template detail */
+"Name" = "ชื่อ";
+"Extension" = "นามสกุล";
+"Default file name" = "ชื่อไฟล์เริ่มต้น";
+"Enabled in menu" = "เปิดใช้ในเมนู";
+"Template Content" = "เนื้อหา Template";
+"Supported variables: {date} {time} {user} {folder} {uuid} {counter} {cursor}" = "ตัวแปรที่รองรับ: {date} {time} {user} {folder} {uuid} {counter} {cursor}";
+
+/* Terminal settings */
+"Show \"Open in Terminal\" in the Finder menu" = "แสดง \"Open in Terminal\" ในเมนู Finder";
+"Terminal app" = "แอป Terminal";
+"Choose the terminal app to open when you click \"Open in …\" in Finder's right-click menu. The menu opens that terminal at the folder. Only terminals installed on this Mac are shown (Terminal.app and iTerm support cd-ing into the folder best)." = "เลือกแอป terminal ที่จะเปิดเมื่อคลิก \"Open in …\" ในเมนูคลิกขวาของ Finder เมนูจะเปิด terminal นั้นที่โฟลเดอร์ แสดงเฉพาะ terminal ที่ติดตั้งในเครื่อง (Terminal.app และ iTerm รองรับการ cd เข้าโฟลเดอร์ได้ดีที่สุด)";
+
+/* Editor settings */
+"Show \"Open in Editor\" in the Finder menu" = "แสดง \"Open in Editor\" ในเมนู Finder";
+"Editor app" = "แอป Editor";
+"No supported code editor found on this Mac (e.g. VS Code, Cursor, Xcode)" = "ไม่พบ code editor ที่รองรับในเครื่องนี้ (เช่น VS Code, Cursor, Xcode)";
+"Choose the editor app to open when you click \"Open in …\" in Finder's right-click menu. The menu opens the editor with the folder as its workspace. Only editors installed on this Mac are shown." = "เลือกแอป editor ที่จะเปิดเมื่อคลิก \"Open in …\" ในเมนูคลิกขวาของ Finder เมนูจะเปิด editor พร้อมโฟลเดอร์เป็น workspace แสดงเฉพาะ editor ที่ติดตั้งในเครื่อง";
+
+/* Empty selection */
+"Select an item" = "เลือกหัวข้อ";
+"Choose an item from the list on the left" = "เลือกหัวข้อจากรายการด้านซ้าย";
+
+/* Onboarding */
+"Welcome to FinderForge" = "ยินดีต้อนรับสู่ FinderForge";
+"Add a New File menu to Finder's right-click menu" = "เพิ่มเมนูสร้างไฟล์ใหม่ในคลิกขวาของ Finder";
+"Enable the Extension" = "เปิดใช้งาน Extension";
+"To make the menu appear in Finder, you need to enable the extension first:" = "เพื่อให้เมนูปรากฏใน Finder คุณต้องเปิด extension ก่อน:";
+"1. Open **System Settings**" = "1. เปิด **System Settings**";
+"2. Go to **Privacy & Security → Extensions**" = "2. ไปที่ **Privacy & Security → Extensions**";
+"3. Click **Added Extensions** or **Finder Extensions**" = "3. คลิก **Added Extensions** หรือ **Finder Extensions**";
+"4. Turn on **FinderForge**" = "4. ติ๊กเปิด **FinderForge**";
+"Open System Settings" = "เปิด System Settings";
+"You're all set!" = "พร้อมใช้งานแล้ว!";
+"Right-click any folder in Finder to see the New File menu" = "คลิกขวาในโฟลเดอร์ใดก็ได้ใน Finder จะเห็นเมนู New File";
+"Back" = "ย้อนกลับ";
+"Next" = "ถัดไป";
+"Get Started" = "เริ่มใช้งาน";

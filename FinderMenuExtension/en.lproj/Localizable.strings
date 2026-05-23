@@ -1,0 +1,11 @@
+/* FinderMenuExtension — English */
+
+"New File" = "New File";
+"(No file types enabled)" = "(No file types enabled)";
+"Open in %@" = "Open in %@";
+"Cut" = "Cut";
+"Cut %d items" = "Cut %d items";
+"Paste (Move)" = "Paste (Move)";
+"Paste %d items (Move)" = "Paste %d items (Move)";
+"Clear Cut Selection" = "Clear Cut Selection";
+"Some items could not be moved" = "Some items could not be moved";

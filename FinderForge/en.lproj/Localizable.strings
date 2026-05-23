@@ -1,0 +1,47 @@
+/* FinderForge — English */
+
+/* Sidebar / Settings */
+"General" = "General";
+"Open in Terminal" = "Open in Terminal";
+"Open in Editor" = "Open in Editor";
+"File Types" = "File Types";
+"Reset to defaults" = "Reset to defaults";
+
+/* Template detail */
+"Name" = "Name";
+"Extension" = "Extension";
+"Default file name" = "Default file name";
+"Enabled in menu" = "Enabled in menu";
+"Template Content" = "Template Content";
+"Supported variables: {date} {time} {user} {folder} {uuid} {counter} {cursor}" = "Supported variables: {date} {time} {user} {folder} {uuid} {counter} {cursor}";
+
+/* Terminal settings */
+"Show \"Open in Terminal\" in the Finder menu" = "Show \"Open in Terminal\" in the Finder menu";
+"Terminal app" = "Terminal app";
+"Choose the terminal app to open when you click \"Open in …\" in Finder's right-click menu. The menu opens that terminal at the folder. Only terminals installed on this Mac are shown (Terminal.app and iTerm support cd-ing into the folder best)." = "Choose the terminal app to open when you click \"Open in …\" in Finder's right-click menu. The menu opens that terminal at the folder. Only terminals installed on this Mac are shown (Terminal.app and iTerm support cd-ing into the folder best).";
+
+/* Editor settings */
+"Show \"Open in Editor\" in the Finder menu" = "Show \"Open in Editor\" in the Finder menu";
+"Editor app" = "Editor app";
+"No supported code editor found on this Mac (e.g. VS Code, Cursor, Xcode)" = "No supported code editor found on this Mac (e.g. VS Code, Cursor, Xcode)";
+"Choose the editor app to open when you click \"Open in …\" in Finder's right-click menu. The menu opens the editor with the folder as its workspace. Only editors installed on this Mac are shown." = "Choose the editor app to open when you click \"Open in …\" in Finder's right-click menu. The menu opens the editor with the folder as its workspace. Only editors installed on this Mac are shown.";
+
+/* Empty selection */
+"Select an item" = "Select an item";
+"Choose an item from the list on the left" = "Choose an item from the list on the left";
+
+/* Onboarding */
+"Welcome to FinderForge" = "Welcome to FinderForge";
+"Add a New File menu to Finder's right-click menu" = "Add a New File menu to Finder's right-click menu";
+"Enable the Extension" = "Enable the Extension";
+"To make the menu appear in Finder, you need to enable the extension first:" = "To make the menu appear in Finder, you need to enable the extension first:";
+"1. Open **System Settings**" = "1. Open **System Settings**";
+"2. Go to **Privacy & Security → Extensions**" = "2. Go to **Privacy & Security → Extensions**";
+"3. Click **Added Extensions** or **Finder Extensions**" = "3. Click **Added Extensions** or **Finder Extensions**";
+"4. Turn on **FinderForge**" = "4. Turn on **FinderForge**";
+"Open System Settings" = "Open System Settings";
+"You're all set!" = "You're all set!";
+"Right-click any folder in Finder to see the New File menu" = "Right-click any folder in Finder to see the New File menu";
+"Back" = "Back";
+"Next" = "Next";
+"Get Started" = "Get Started";
