@@ -78,4 +78,6 @@ Copy Path, New Folder from a selection, import/export templates, zip compression
 
 ## License
 
-Haven't picked one yet.
+GPLv3, full text in [LICENSE](LICENSE). Fork away, just keep it open.
+
+© 2026 thappatan chanphen

@@ -78,4 +78,6 @@ Copy Path, New Folder จากไฟล์ที่เลือก, import/expo
 
 ## License
 
-ยังไม่ได้เลือก
+GPLv3 ข้อความเต็มอยู่ในไฟล์ [LICENSE](LICENSE) เอาไป fork ได้เลย ขอแค่เปิด source ต่อ
+
+© 2026 thappatan chanphen
