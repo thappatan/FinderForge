@@ -54,8 +54,6 @@ FinderForgeIcon.png      1024px icon master
 
 ## A few things worth knowing
 
-App Groups work with a free Apple ID as long as you're only testing on your own Mac. Shipping it to anyone else, or to the App Store, needs a paid developer account.
-
 Finder hands the menu off across an XPC boundary and drops anything it can't serialize on the way. That's why there are no real separator lines or styled section headers in the menu, and why the menu icons are plain colored bitmaps rather than SF Symbols (template symbols come out solid black on the other side). Spent a while learning that one.
 
 A Finder extension also can't claim ⌘X / ⌘V globally, so Cut and Paste only live in the right-click menu, not the keyboard.
