@@ -39,6 +39,14 @@ Then run the helper script, which builds, reloads the extension and opens the ap
 
 Or just open `FinderForge.xcodeproj` and press Cmd+R.
 
+To install it as a real app you can launch from Spotlight or Launchpad, build a Release copy into `/Applications`:
+
+```
+./Scripts/install.sh
+```
+
+Your own development signing is enough to run it on your own Mac — no Developer ID or notarization needed. That's only for handing the app to other people.
+
 The `.xcodeproj` is generated from `project.yml`, so it isn't checked in. Edit `project.yml`, never the project file directly. If you forked this, point `DEVELOPMENT_TEAM` at your own team.
 
 The first time, you have to switch the extension on yourself: System Settings → General → Login Items & Extensions, then find it under Added Extensions (or Finder) and tick FinderForge. Right-click any folder and the menu should be there. If it isn't, `killall Finder` usually sorts it out.

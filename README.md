@@ -39,6 +39,14 @@ xcodegen generate
 
 หรือจะเปิด `FinderForge.xcodeproj` แล้วกด Cmd+R ก็ได้
 
+อยากติดตั้งให้เป็นแอปจริงที่เปิดจาก Spotlight / Launchpad ได้ ให้ build แบบ Release ลง `/Applications`:
+
+```
+./Scripts/install.sh
+```
+
+การรันบนเครื่องตัวเองใช้ dev signing ของคุณก็พอ ไม่ต้อง Developer ID หรือ notarize อันนั้นจำเป็นเฉพาะตอนแจกแอปให้คนอื่น
+
 ตัว `.xcodeproj` ถูก generate จาก `project.yml` เลยไม่ได้เก็บไว้ใน git ให้แก้ที่ `project.yml` อย่าไปแก้ไฟล์โปรเจกต์ตรงๆ ถ้า fork ไปใช้ ก็เปลี่ยน `DEVELOPMENT_TEAM` เป็น team ของตัวเอง
 
 ครั้งแรกต้องไปเปิด extension เองก่อน: System Settings → General → Login Items & Extensions แล้วหาในหัวข้อ Added Extensions (หรือ Finder) ติ๊กเปิด FinderForge จากนั้นคลิกขวาที่โฟลเดอร์ไหนก็ได้ เมนูน่าจะขึ้นมา ถ้าไม่ขึ้น `killall Finder` มักจะช่วยได้
